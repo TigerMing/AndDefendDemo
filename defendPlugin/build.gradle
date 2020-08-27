@@ -1,0 +1,28 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation "com.android.tools.build:gradle:4.0.0"
+    implementation 'org.codehaus.groovy:groovy:2.4.7'
+    implementation 'org.ow2.asm:asm:8.0'
+    implementation 'org.ow2.asm:asm-commons:8.0'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    google()
+}
+
+uploadArchives{
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.zy.ming.defend.plugin'
+            pom.artifactId = 'defend-plugin'
+            pom.version = '1.0.0'
+            repository(url: uri('../repo'))
+        }
+    }
+}

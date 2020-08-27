@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+apply plugin: 'defendplugin'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.0"
+
+    defaultConfig {
+        applicationId "com.zy.ming.anddefenddemo"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        debug{
+            debuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    defendExt{
+
+        /**
+         * IntentUtil工具类的路径
+         */
+        classPath = "com/zy/ming/anddefenddemo/IntentUtil"
+
+        classWhiteList = ["IntentUtil.class"]
+
+        /**
+         * Intent替换映射表
+         */
+        replaceArray = [
+                "(Ljava/lang/String;I)I=getIntExtra=(Landroid/content/Intent;Ljava/lang/String;I)I",
+                "(Ljava/lang/String;Z)Z=getBooleanExtra=(Landroid/content/Intent;Ljava/lang/String;Z)Z",
+                "(Ljava/lang/String;)Ljava/lang/String;=getStringExtra=(Landroid/content/Intent;Ljava/lang/String;)Ljava/lang/String;",
+                "(Ljava/lang/String;)Landroid/os/Parcelable;=getParcelableExtra=(Landroid/content/Intent;Ljava/lang/String;)Landroid/os/Parcelable;"
+        ]
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar","*.aar"])
+//    implementation project(path : ":corelib")
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-ui:2.1.0'
+
+}

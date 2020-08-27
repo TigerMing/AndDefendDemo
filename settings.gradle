@@ -1,0 +1,5 @@
+include ':moduledemo'
+include ':defendPlugin'
+include ':corelib'
+include ':app'
+rootProject.name = "AndDefendDemo"
